@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/css/main.css">
+</head>
+<body style="background-color: silver">
+	<h1 style="text-align: center">Service Agent by SAP</h1>
+	<form style="margin-left: 50px; border: medium;" action="#"
+		th:action="@{/v1/sap/newJob}" method="post" th:object="${requestForm}">
+		<fieldset>
+			<label>Job Name:</label><br> <input type="text" width="100"
+				th:field="*{jobName}" /><br /> <br /> <label>API Detail:</label><br>
+			<select>
+				<option th:value="'get'" th:text="GET"></option>
+				<option th:value="'poet'" th:text="POST"></option>
+			</select> <input type="text" width="100" th:field="*{url}" /><br /> <br>
+			<br> <label>Execution:</label> <input type="radio"
+				th:field="*{execution}" value="schedule" />Schedule <input
+				type="radio" th:field="*{execution}" value="now" checked /> Execute
+			Now <label><br> <br>Request Body:</label><br>
+			<textarea rows="10" cols="50" th:field="*{body}"></textarea>
+			<br />
+			<button type="submit">Submit Directly</button>
+		</fieldset>
+	</form>
+</body>
+</html>

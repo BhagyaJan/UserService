@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/css/main.css">
+<script type="text/javascript">
+        function ChangeToproperties(param)
+		{ 
+            alert('onchange on Favorite '+ param);
+        }
+    </script>
+</head>
+<body>
+	<h1>List Of All Jobs</h1>
+	<p>
+		<a href="/v1/sap/job/favorites"><button>Show Favorites</button></a> <a
+			href="/v1/sap/alljobs"><button>All Jobs</button></a>
+	</p> 
+	 
+	<div th:switch="${jobs}">
+    <h2 th:case="null">No jobs submitted yet!</h2>
+        <div th:case="*">
+        <form>
+			<table>
+				<thead>
+					<tr>
+						<th>Favorite</th>
+						<th>ID</th>
+						<th>JOB NAME</th>
+						<th>Scheduled</th>
+						<th>Executed</th>
+						<th>Status</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr th:each="job : ${jobs}">
+					<td><input type="checkbox" id = "favorite" name="favorite" th:checked="${job.isFavorite}"  onchange="ChangeToproperties(document.getElementById('job_name').value)"/></td>
+					<td th:text="${job.id}" id="job_id"  name="job_id"></td>
+					<td th:text="${job.job_name}" name="job_name"></td>
+					<td th:text="${job.submitted}"></td>
+					<td th:text="${job.execution}"></td>
+					<td th:text="${job.status}"></td>
+					<td><a th:href="@{/v1/sap/job/{id}(id=${job.id})}">
+							<button>Details</button>
+					</a></td>
+					</tr>
+				</tbody>
+			</table>
+			</form>
+		</div>
+		<p>
+			<a href="/v1/sap/request"><button>Request Page</button></a>
+		</p>
+	</div>
+</body>
+</html>
