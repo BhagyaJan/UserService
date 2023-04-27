@@ -11,6 +11,7 @@ class UserServiceSapApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("Testcase executing......");
 		assertEquals(true, true);
 	}
 
